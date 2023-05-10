@@ -1,0 +1,204 @@
+:: StoryTitle
+Game
+
+
+:: StoryData
+{
+  "ifid": "32C60BFD-CE34-4DD6-AEB7-DB7D1A89B45B",
+  "format": "Harlowe",
+  "format-version": "3.3.5",
+  "start": "Game introduction",
+  "zoom": 1
+}
+
+
+:: Are you sure you're not the one to blame for the town's decline? {"position":"1600,425","size":"100,100"}
+Mayor: Well, I certainly know people who would love to blame me. (The mayor does not approve of this response.) Anyways, let's get you started right away. 
+
+[[Go downtown with Mayor.]] 
+
+
+:: Game introduction {"position":"1750,100","size":"100,100"}
+(set:$playername to (prompt:"What is your name?", "Player One")){
+You arrive at city hall and look around your new dismal, dreary office. You currenly have $playerMoney dollars. }
+
+[[Walk to mayor's office]]
+
+<!-- Player Money --> 
+(set:$playerMoney to 0)
+
+<!-- Townsfolk approval initialization -->
+(set:$dejaApproval to 0)
+(set:$janiceApproval to 0)
+(set:$joseApproval to 0)
+(set:$mayorApproval to 0)
+
+
+:: Go downtown with Mayor. {"position":"1700,600","size":"100,100"}
+In the city's downtown, you see a 6 lane road poxed with potholes and clogged with traffic. The sidewalk is narrow and covered in weeds, trash, and broken glass. Buildings look ramshackle and outdated, and many of them are outright abandoned. 
+
+Mayor: As you can see, things around here are... not ideal. 
+
+As she says this, a car honks and rear ends the car in front of it. 
+
+She sighs. "This road is incredibly dangerous for both drivers and pedestrians. I'm hoping you can find a way to solve this problem. In the meantime, could you first take some time to clean up the sidewalk? Once you're done with that task, you can come find me in my office. 
+
+[[pickup trash]]
+[[pick weeds]]
+
+[[View quests |Quests]]
+
+<!-- Quest Declaraion -->
+(set:$cleanDowntownSidewalk to true)
+
+<!-- variable declaration for quest objectives -->
+(set:$MainAveWeeds to true)
+(set:$MainAveTrash to true)
+
+
+:: Goodbye {"position":"950,725","size":"100,100"}
+[[meet Janice]] 
+[[Meet deja]]
+
+
+:: How do you like working here? {"position":"1225,900","size":"100,100"}
+Well, I'll be honest, the transportation department doesn't have enough funding. I'd love to build a beautiful public transportation system in this town, but all of our budget goes to road maitnence, and even that we're not doing well. 
+
+Maybe you can help with our budget problems! 
+
+[[I can certainly try.]]
+[[Meet deja]]
+
+
+:: I absolutely am! {"position":"1775,425","size":"100,100"}
+(set:$mayorApproval to $mayorApproval + 1)
+That's great to hear! I like your attitude! (The mayor approves of this). 
+
+We'll get you started right away. I'll give you a tour of downtown so you can see what you're working with. 
+
+[[Go downtown with Mayor.]]
+
+
+:: I can certainly try. {"position":"1150,1025","size":"100,100"}
+You: I can certainly try
+[[Goodbye]]
+
+
+:: I don't know. I'm not feeling very confident about this anymore. {"position":"1975,450","size":"100,100"}
+I understand your trepidation, you have a herculean task ahead of you that not many would be eager to take on. I'd like to get you started right away and give you a tour of the downtown area where you'll have your first project. 
+
+[[Go downtown with Mayor.]] 
+
+
+:: Mayor Office - sidewalk quest {"position":"1700,1000","size":"100,100"}
+
+
+
+:: Meet deja {"position":"975,475","size":"100,100"}
+Oh, you're a new city planner here? Good luck trying to improve this place. 
+
+[[You don't like it here?]]
+[[Thanks! I'll do my best.]]
+
+
+:: Quests {"position":"1975,675","size":"100,100"}
+<h2>Quests</h2>
+(set:$cleanDowntownSidewalkDescription to "<h4>Clean Sidewalk</h4> <br>The mayor wants you to clean up the sidewalks on main avenue. <ol><li>Pick up trash. </li><li>pick weeds </li></ol>")
+(if:$cleanDowntownSidewalk is true)[$cleanDowntownSidewalkDescription]
+
+
+:: Thanks! I'll do my best. {"position":"1225,500","size":"100,100"}
+[[meet Janice]]
+
+
+:: Typewriter Test {"position":"2125,100","size":"100,100"}
+
+<!-- Set the text to show -->
+(set: $typewriterText to "Hello, world!")
+<!-- Display (call) the Typewriter passage -->
+{
+  <!-- Create a variable to track the position within the $typewriterText string -->
+  (set: $typewriterPos to 1)
+
+  <!-- Create a hook to hold the typed text -->
+  |typewriterOutput>[]
+
+  <!-- Set a delay of 20ms seconds per loop -->
+  (live: 20ms)[
+
+    <!-- Add the next character to the hook -->
+    (append: ?typewriterOutput)[(print: $typewriterText's $typewriterPos)]
+
+    <!-- Update the position -->
+    (set: $typewriterPos to it + 1)
+
+    <!-- If it's gone past the end, stop -->
+    (if: $typewriterPos is $typewriterText's length + 1)[
+      (stop:)
+    ]
+  ]
+}
+
+
+:: Untitled Passage {"position":"2475,1200","size":"100,100"}
+Deja: Are you coming to watch my performance tonight?
+Janice: I'm sorry, I need to work late tonight. 
+Deja: Of course you do. Whatever. I'll see you eventually, I guess. 
+
+Deja walks away and Janice looks defeated. 
+
+[[What's wrong?]]
+
+
+:: Walk to mayor's office {"position":"1750,250","size":"100,100"}
+<!-- Introduction --> {
+
+Walking into the Mayor's office, you see a frazzled looking woman hunched over a table surrounded by strewn papers. She startles when she notices you.}
+
+Mayor: Ah, hello! You must $playername! I'm sorry, things are a little hectic around here, I wasn't expecting you to arrive so soon. We're so thankful you decided to join us here in town. Our last city planner quit only six months into the job. Would you believe that's the longest someone has last in this position? Our town the past few years has been on a steady decline due to mismanagement in the previous administration. I've been in this office for about a year now, but there's only so much I've been able to accomplish with how disorganized things are around here. That's where I'm hoping you can help. Our town desperately needs new infastructure and a new vision for how we can improve. With you magical abilities, I think we can fasttrack real change. Are you up for the task? 
+
+[[I absolutely am!]]
+[[I don't know. I'm not feeling very confident about this anymore.]]
+[[Are you sure you're not the one to blame for the town's decline?]]
+
+
+:: What's wrong? {"position":"2475,1400","size":"100,100"}
+Janice: sigh* My daughter is upset I never spend time with her anymore. It's not that I don't want to, I really do! But I need to work overtime if I want to pay for food, rent, and her college education fund. She has no idea how much I sacrifice for her...
+
+
+:: You don't like it here? {"position":"800,625","size":"100,100"}
+Nope. There's nothing to do in this run down shitty down. I miss my old town... 
+
+[[Your old town?]]
+[[Goodbye]]
+
+
+:: Your old town? {"position":"775,850","size":"100,100"}
+Yeah, my mom and I moved here two years ago during my sophomore year. Everyone in my school already knows each other, so it's been hard to make new friends here.
+
+
+:: meet Janice {"position":"1200,750","size":"100,100"}
+I'm Janice, nice to meet you! I'm head of the transportation department here in town. As a city planner, I'm sure we'll be working together. 
+
+[[How do you like working here?]]
+
+
+:: pick weeds {"position":"1600,825","size":"100,100"}
+(if:$MainAveWeeds is true)[You use a bit of your magic to kill off the weeds on the sidewalk. ]
+(set:$MainAveWeeds to false)
+
+(if:$MainAveTrash is true)[[pickup trash]]
+
+<!-- Make some logic so that if you have already met Deja, you won't meet 
+
+(if:$MainAveTrash is false and $MainAveWeeds is false)[You've finished both tasks the mayor gave to you. [[Mayor Office - sidewalk quest]]]
+
+
+:: pickup trash {"position":"1775,825","size":"100,100"}
+<!-- Clean sidewalk -->
+(if:$MainAveTrash is true)[With a flourish of your magic, you get rid of all of the trash on the sidewalk.]
+(set:$MainAveTrash to false)
+
+(if:$MainAveWeeds is true)[[pick weeds]]
+
+(if:$MainAveTrash is false and $MainAveWeeds is false)[You've finished both tasks the mayor gave to you. [[Mayor Office - sidewalk quest]]]
